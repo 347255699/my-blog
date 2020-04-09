@@ -1,5 +1,5 @@
 ---
-title: 继篇：GitHub Pages 自定义域名 
+title: 续篇：GitHub Pages 自定义域名 
 date: 2020-04-09
 tags: 
   - Github
@@ -10,7 +10,7 @@ location: Shenzhen
 
 ## 前言
 
-这里是接上 【开篇：使用 VuePress 搭建个人 Blog】 写的，主要是觉得没有自定义域名称不上博客，还有在配置 dns 解析市踩了坑，所以需要记录一下。
+这里是接上 【开篇：使用 VuePress 搭建个人 Blog】 写的，主要是觉得没有自定义域名称不上博客，还有在配置 dns 解析时踩了坑，所以需要记录一下。
 
 ## 域名购买
 
