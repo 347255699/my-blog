@@ -1,7 +1,22 @@
 module.exports = {
     title: 'Menfre Blog', // Title for the site. This will be displayed in the navbar.
     theme: '@vuepress/theme-blog',
+    base: "/my-blog/",
     themeConfig: {
-        // Please keep looking down to see the available options.
+        dateFormat: "YYYY-MM-DD",
+        footer: {
+            contact: [
+                {
+                    type: 'github',
+                    link: 'https://github.com/347255699',
+                }
+            ],
+            copyright: [
+                {
+                    text: 'Copyright © 2020 Menfre Blog.',
+                    link: '',
+                },
+            ]
+        }
     }
 }

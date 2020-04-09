@@ -59,9 +59,10 @@ VuePress 推荐的目录结构是这样的：
 其中 `blog/.vuepress/public` 用来存在我们文章中需要用到的静态资源，如上面你看到的项目目录结构图，可以在文章中通过 `/image/project-structure.jpg` 路径访问到图片。
 
 ## 基本配置 
-通过 **安装** 环节，我们得到一个项目。接下来我们需要做一些简单的配置。以便能够通过 npm 管理项目以及对 blog 进行配置。
 
-package.json:
+通过 `安装` 环节，我们得到一个项目。接下来我们需要做一些简单的配置。以便能够通过 npm 管理项目以及对 blog 进行配置。
+
+### package.json:
 
 ```json
 {
@@ -77,7 +78,7 @@ package.json:
 ```
 其中 `devDependencies` 在 blog 主题安装完成后会自动填充。我们需要配置 `scripts` 即可。
 
-config.js
+### config.js
 ```js
 module.exports = {
     title: 'Menfre Blog', // Title for the site. This will be displayed in the navbar.
@@ -91,7 +92,7 @@ module.exports = {
 
 最后我们在编写文章时需要遵循一定的规范。
 
-### 内容生成
+## 内容生成
 
 我们的文章一般使用 Markdown 编写，在文章开头我们可以集成如下格式化信息，以便 Blog 可以通过该信息来组织和显示文章。
 
@@ -108,11 +109,11 @@ location: Shenzhen
 My content.
 ```
 
-#### .md 文件命名方式
+### .md 文件命名方式
 
 这里推荐 `2020-04-09-build-blog-on-vuepress.md` 这样的命名方式，这样做可以规范文章的访问路径，我们可以通过 `http://localhost:8080/2020/04/09/build-blog-on-vuepress/` 来访问这篇文章。
 
-#### tags
+### tags
 
 我们可以通过 tags 来分类和索引文章。
 
@@ -141,6 +142,109 @@ npm run build
 
 构建生成的文件会被放在 `blog/.vuepress/dist` 下。
 
+## 部署
+
+这里我们简单使用 GitHub Pages 来部署。
+
+1. 首先我们在自己的 github 上的添加一个仓库。
+
+2. 然后我们依次执行如下命令。
+
+```shell
+# 生成静态文件
+npm run build
+
+# 进入生成的文件夹
+cd blog/.vuepress/dist
+
+git init
+git add -A
+git commit -m 'deploy'
+
+git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+```
+
+> 其中 <USERNAME> 是你的 github 账户名，<REPO> 是你的仓库名。
+
+3. 通过 `https://<USERNAME>.github.io/<REPO>/` 即可访问到你的博客了。
+
+[点击尝试访问我的博客](https://347255699.github.io/my-blog/)
+
 ## 更多
 
-todo
+我们可以为 Blog 的 footer 上配置一些信息，如 联系方式和 copyright 等。 也可以配置下 Blog 里时间的格式。
+
+### 时间格式
+
+```js
+module.exports = {
+  themeConfig: {
+    dateFormat: 'YYYY-MM-DD'
+  }
+}
+```
+
+### 添加联系方式
+
+```js
+module.exports = {
+  themeConfig: {
+    footer: {
+      contact: [
+        {
+          type: 'github',
+          link: 'https://github.com/vuejs/vuepress',
+        },
+        {
+          type: 'twitter',
+          link: 'https://github.com/vuejs/vuepress',
+        },
+      ],
+    },
+  },
+}
+```
+
+联系方式支持的类型：
+
+* codepen
+* codesandbox
+* facebook
+* github
+* gitlab
+* instagram
+* linkedin
+* mail
+* messenger
+* music
+* phone
+* twitter
+* video
+* web
+* youtube
+
+### 添加 copyright
+
+```js
+module.exports = {
+  themeConfig: {
+    footer: {
+      copyright: [
+        {
+          text: 'Privacy Policy',
+          link: 'https://policies.google.com/privacy?hl=en-US',
+        },
+        {
+          text: 'MIT Licensed | Copyright © 2018-present Vue.js',
+          link: '',
+        },
+      ],
+    },
+  },
+}
+```
+
+## 参考资料
+
+1. [VuePress](https://vuepress.vuejs.org/zh/) VuePress 官网
+2. [@vuepress/theme-blog](https://vuepress-theme-blog.ulivz.com/#intro) Blog 主题指南
