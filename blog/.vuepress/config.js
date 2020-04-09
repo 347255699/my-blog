@@ -1,7 +1,7 @@
 module.exports = {
     title: 'Menfre Blog', // Title for the site. This will be displayed in the navbar.
     theme: '@vuepress/theme-blog',
-    base: "/my-blog/",
+    base: "/",
     themeConfig: {
         dateFormat: "YYYY-MM-DD",
         footer: {

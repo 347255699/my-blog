@@ -2,8 +2,7 @@
 title: 开篇：使用 VuePress 搭建个人 Blog
 date: 2020-04-09
 tags: 
-  - Blog
-  - Vue
+  - VuePress
 author: Menfre
 location: Shenzhen  
 ---
@@ -54,7 +53,7 @@ VuePress 推荐的目录结构是这样的：
 
 项目目录结构图：
 
-![project-structure](/my-blog/image/project-structure.jpg)
+![project-structure](/image/project-structure.jpg)
 
 其中 `blog/.vuepress/public` 用来存在我们文章中需要用到的静态资源，如上面你看到的项目目录结构图，可以在文章中通过 `/image/project-structure.jpg` 路径访问到图片。
 
