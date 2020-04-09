@@ -54,7 +54,7 @@ VuePress 推荐的目录结构是这样的：
 
 项目目录结构图：
 
-![project-structure](/image/project-structure.jpg)
+![project-structure](/my-blog/image/project-structure.jpg)
 
 其中 `blog/.vuepress/public` 用来存在我们文章中需要用到的静态资源，如上面你看到的项目目录结构图，可以在文章中通过 `/image/project-structure.jpg` 路径访问到图片。
 
@@ -146,27 +146,45 @@ npm run build
 
 这里我们简单使用 GitHub Pages 来部署。
 
-1. 首先我们在自己的 github 上的添加一个仓库。
+首先我们在自己的 github 上的添加一个仓库。
 
-2. 然后我们依次执行如下命令。
+然后我们在项目中编写一个 deploy.sh 用于完成项目部署。
 
 ```shell
+#!/usr/bin/env sh
+
+# 确保脚本抛出遇到的错误
+set -e
+
 # 生成静态文件
 npm run build
 
 # 进入生成的文件夹
 cd blog/.vuepress/dist
 
+# 如果是发布到自定义域名
+# echo 'www.example.com' > CNAME
+
 git init
 git add -A
 git commit -m 'deploy'
 
+# 如果发布到 https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
+
+cd -
+
 ```
 
-> 其中 <USERNAME> 是你的 github 账户名，<REPO> 是你的仓库名。
+> 其中 `<USERNAME>` 是你的 github 账户名，`<REPO>` 是你的仓库名。
 
-3. 通过 `https://<USERNAME>.github.io/<REPO>/` 即可访问到你的博客了。
+执行：
+```shell
+chmod +x ./deploy.sh
+./deploy.sh
+```
+
+最后通过 `https://<USERNAME>.github.io/<REPO>/` 即可访问到你的博客了。
 
 [点击尝试访问我的博客](https://347255699.github.io/my-blog/)
 
