@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "vuepress dev blog",
-    "build": "vuepress build blog"
+    "build": "node ./builds/addComponents.js && vuepress build blog && node ./builds/delComponents.js"
   },
   "devDependencies": {
     "@vuepress/theme-blog": "^2.2.0",
