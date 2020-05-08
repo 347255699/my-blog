@@ -9,7 +9,7 @@ location: Shenzhen
 
 通过前面两篇博客的环境搭建，我们拥有了一个 k8s 环境和一个 harbor 容器注册中心。现在我们需要尝试将应用容器化然后发布到 harbor 中。
 
-## 准备应用
+## 1. 准备应用
 
 首先我们需要准备一个 Springboot 应用(Java 应用)。这里我们只启用了 rest service 功能，并集成一个 swagger-ui 方便我们对应用进行访问。
 
@@ -162,7 +162,7 @@ COPY target/${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
 
-## 打包应用
+## 2. 打包应用
 
 这里我们使用 dockerfile-maven-plugin 插件来打包和发布我们的应用。
 
@@ -228,7 +228,7 @@ harbor.com/library/spring-demo   1.0-SNAPSHOT        3ac8f4d1d029        5 hours
 2020-05-08 14:12:57.737  INFO 1 --- [           main] org.mendora.HelloApplication             : Started HelloApplication in 3.339 seconds (JVM running for 3.96)
 ```
 
-我们可以访问一下 Swgger-ui。
+我们可以访问一下 Swagger-ui。
 
 ```http
  http://localhost:8080/swagger-ui.html 
