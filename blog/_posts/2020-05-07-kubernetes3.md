@@ -7,7 +7,7 @@ author: Menfre
 location: Shenzhen
 ---
 
-通过前面两篇博文的环境搭建，我们拥有了一个 k8s 环境和一个 harbor 容器注册中心。现在我们需要尝试将应用容器化然后发布到 harbor 中。
+通过前面两篇博客的环境搭建，我们拥有了一个 k8s 环境和一个 harbor 容器注册中心。现在我们需要尝试将应用容器化然后发布到 harbor 中。
 
 ## 准备应用
 
@@ -151,7 +151,7 @@ public class SwaggerConfig {
 }
 ```
 
-有了 Maven 配置和 Springboot 的启动源代码之外，我们还需要项目跟目录下放一个 Dockerfile。
+有了 Maven 配置和 Springboot 的启动源代码之外，我们还需要在项目根目录下放一个 Dockerfile 文件。
 
 Dockerfile:
 
@@ -191,7 +191,7 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 </plugin>
 ```
 
-示例中注释的部分是跟 maven 的 package、deploy 等生成周期绑定的配置，如果你需要在发布 jar 的同时发布镜像，可以通过该配置来绑定。
+示例中注释的部分是跟 maven 的 package、deploy 等生命周期绑定的配置，如果你需要在发布 jar 的同时发布镜像，可以通过该配置来绑定。
 
 这里我们通过 `useMavenSettingsForAuth` 的方式来配置私库的账户和密码。因此需要在 Maven setting.xml 粘贴如下服务器信息。
 
@@ -236,7 +236,7 @@ harbor.com/library/spring-demo   1.0-SNAPSHOT        3ac8f4d1d029        5 hours
 
 ![swagger-ui](/image/swagger-ui.jpg)
 
-看起来我们的容器是正式可用的，接下来我们就可以通过 dockerfile:push 推送到 harbor 了。
+看起来我们的容器是正确可用的，接下来我们就可以通过 dockerfile:push 推送到 harbor 了。
 
 推送前我们要确认一下，是否在本地配置了 harbor.com hosts。是否将 https://harbor.com 配置为 docker 的私库了。
 
@@ -262,7 +262,7 @@ harbor.com/library/spring-demo   1.0-SNAPSHOT        3ac8f4d1d029        5 hours
 
 ![image-20200508222436939](/image/harbor-images.png)
 
-通过前面三篇教程我们算是搭建了一个完成的 k8s 环境了，接下来就可以好好练习了。
+通过前面三篇博客我们算是搭建了一个完整的 k8s 环境了，接下来就可以好好练习了。
 
 ## 资料
 
