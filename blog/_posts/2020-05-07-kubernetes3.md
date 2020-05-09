@@ -272,5 +272,3 @@ harbor.com/library/spring-demo   1.0-SNAPSHOT        3ac8f4d1d029        5 hours
 2. [spring-boot-docker](https://spring.io/guides/gs/spring-boot-docker/)
 
 3. [docker x509 error](https://blog.csdn.net/liusf1993/article/details/102508663)
-
-

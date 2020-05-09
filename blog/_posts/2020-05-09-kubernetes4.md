@@ -103,12 +103,12 @@ Pod 这种超亲密关系的容器设计思想，实际上是希望用户在遇�
 
 这里举例 Tomcat 容器和 WAR 包。
 
-这里我们要通过容器是实现将一个 WAR 包放到 Tomcat 的 webapps 目录下并运行起来。
+这里我们要通过容器来实现将一个 WAR 包放到 Tomcat 的 webapps 目录下并运行起来。
 
 * 一种方法是将 WAR 包和 Tomcat 打包进一个容器中。但是考虑 WAR 包一旦更换就需要打包一个新的镜像。
 * 另一个方法是在容器中挂载一个对应宿主机目录的 volume，但这个又需要在每台服务器上初始化对应的目录和准备好 WAR 包。
 
-而在 Pod 中我们可以考虑将 Tomcat 打包成一个镜像，将 WAR 包大包一个镜像。然后通过共享 volume 的方式运行起来。
+而在 Pod 中我们可以考虑将 Tomcat 打包成一个镜像，将 WAR 包打包成一个镜像。然后通过共享 volume 的方式运行起来。
 
 ```yaml
 
@@ -141,7 +141,7 @@ spec:
 
 这里我们声明了两个容器，第一个容器使用的镜像是 geektime/sample:v2 ，这个镜像只有一个存放在根目录的 WAR 包 sample.war。而另一个容器使用的镜像是 Tomcat。
 
-这里需要注意的是 WAR 包容器声明的是一个 initContainer 类型。initContainer 和 container 的区别在于，initContainer 会先与 container 且按照声明顺序运行，等 initContainer 运行完成才会运行普通的 container。
+这里需要注意的是 WAR 包容器声明的是一个 initContainer 类型。initContainer 和 container 的区别在于，initContainer 会先于 container 且按照声明顺序运行，等 initContainer 运行完成才会运行普通的 container。
 
 这里我们 Pod 上挂载的 volume 是一个空目录 app-volume，即它只用于容器间共享。WAR 包容器将 app-volume 挂载到自己的 /app 目录。Tomcat 容器将 app-volume 挂载到自己的 /root/apache-tomcat-7.0.42-v2/webapps 目录下。当 WAR 包容器运行时就会将 sample.war 拷贝到对应目录上，因此 Tomcat 在运行时就能加载对应 Java 应用了。并且在之后需要更新 WAR 包时，只要打一个新的 WAR 包镜像即可。
 
@@ -150,5 +150,3 @@ spec:
 Istio 就是一个通过共享 Network Namespace 典型的 Sidecar 项目。
 
 最后为了更好的设计 Pod，我们需要了解下容器的单进城模型，容器的单进程模型不是说容器不允许创建多个进程，而是说容器没有管理多个进程的能力，因为每个容器内 PID=1 的进程就是容器本身，如果通过 docker container -it [containerId] /bin/bash 进入容器内创建的其他进程，这些进程在出现错误或做日志收集等，容器是管理不到的。这是容器的天性。
-
-

@@ -236,9 +236,3 @@ https://harbor.com
 ## 参考资料
 1. [dz45693](https://www.cnblogs.com/majiang/p/11218792.html)
 2. [官方文档——Run the Installer Script](https://goharbor.io/docs/1.10/install-config/run-installer-script/)
-
- 
- <comment/> 
-
- 
- <comment/> 
