@@ -138,12 +138,12 @@ kubernetes 中对 container 的定义与 docker 大致一样。如 image、comma
 
 **imagePullPolicy**: 定义镜像的拉取策略。
 
-* Always：每次创建 Pod 都重新拉取一次镜像，当拉取镜像的 tag 为 nginx 或 nginx:lates 也会起到相同的效果。
-* Never/IfNotPresent：不主动拉取镜像，只有宿主机中不存在才会主动去拉取。
+* Always：每次创建 Pod 都重新拉取一次镜像，当拉取镜像的 tag 为 nginx 或 nginx:latest 也会起到相同的效果。
+* Never/IfNotPresent：不主动拉取镜像，只有在宿主机中不存在才会主动拉取。
 
 **lifecycle**：它定义的是容器的生命周期 Hooks。
 
-lifecycle的作用是在容器的状态发生变化时触发一些列 “钩子”。
+lifecycle的作用是在容器的状态发生变化时触发一系列 “钩子”。
 
 ```yaml
 apiVersion: v1
@@ -167,28 +167,25 @@ spec:
 
 * postStart：容器指定后立即执行一个操作，需要注意的是，这里并不能保证在 ENTRYPOINT 之后执行。
 * preStop：容器在被杀死前(收到 SIGKILL 信号)执行。这里是同步的，只有钩子执行完成才会杀死容器。
+这里的例子是在容器启动后在 /usr/share/message 中写入一条 hello message。在容器关闭之前调用 nginx 的退出命令。
 
-这里例子是在容器启动后在 /usr/share/message 写入一条 hello message。在容器关闭之前调用 nginx 的退出命令。
-
-这里我们可以大致的了解下 Pod 在 kubenetes 中的生命周期。
+这里我们可以大致的了解下 Pod 在 kubernetes 中的生命周期。
 
 Pod 的生命周期主要体现在 API 的 **Status** 字段。它是除了 Metadata 和 Spec 之外第三个比较重要的字段。其中 pod.status.phase 就是 Pod 当前的状态。状态列表如下：
 
 * Pending：表示 Pod 的 yaml 文件已经提交给 kubernetes 并保存在 Etcd 中，但出于其他原因未能被成功创建。
 * Running：表示 Pod 已经成功被某一节点调度，且至少有一个容器在运行中了。
-* Succeeded：表示 Pod 的所有容器都正常运行并成功退出了，这种情况在一次行任务中很常见。
+* Succeeded：表示 Pod 的所有容器都正常运行并成功退出了，这种情况在一次性任务中很常见。
 * Failed：表示 Pod 中至少有一个容器不正常退出(非 0 返回码)退出。这个时候就要想办法 Debug 容器了，通过 Events 等。
 * Unknown：表示异常状态，意味着 Pod 状态未能被 kubelet 持续汇报给 kube-apiserver。可能是主从节点的通信出现问题了。
 
-更进一步的，每一个 Status 还可以细分为一组 **Conditions** 。这些戏份状态包含 PodScheduled、
+更进一步的，每一个 Status 还可以细分出一组 **Conditions** 。这些细分状态包含 PodScheduled、
 
 Ready、Initialized 和 Unschedulable。他们主要用于描述造成当前 Status 的原因。
 
 比如 Status 为 Pending，对应的 Condition 为 Unschedulable，则表示调度出了问题。
 
-又如 Ready Condtion，表示 Pod 不仅正常启动(Running)且已经对外服务了。
+又如 Ready Condition，表示 Pod 不仅正常启动(Running)且已经对外服务了。
 
 如果想知道 Pod Yaml 文件的全部字段，可以参考 $GOPATH/src/k8s.io/kubernetes/vendor/k8s.io/api/core/v1/types.go 下的 struct。
 
- 
- <comment/> 
