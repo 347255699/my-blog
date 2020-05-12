@@ -189,3 +189,6 @@ Ready、Initialized 和 Unschedulable。他们主要用于描述造成当前 Sta
 
 如果想知道 Pod Yaml 文件的全部字段，可以参考 $GOPATH/src/k8s.io/kubernetes/vendor/k8s.io/api/core/v1/types.go 下的 struct。
 
+
+ 
+ <comment/> 

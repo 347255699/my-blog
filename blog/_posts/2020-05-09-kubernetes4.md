@@ -150,3 +150,6 @@ spec:
 Istio 就是一个通过共享 Network Namespace 典型的 Sidecar 项目。
 
 最后为了更好的设计 Pod，我们需要了解下容器的单进程模型，容器的单进程模型不是说容器不允许创建多个进程，而是说容器没有管理多个进程的能力，因为每个容器内 PID=1 的进程就是容器本身，如果通过 docker container -it [containerId] /bin/bash 进入容器内创建的其他进程，这些进程在出现错误或做日志收集等，容器是管理不到的。这是容器的天性。
+
+ 
+ <comment/> 
