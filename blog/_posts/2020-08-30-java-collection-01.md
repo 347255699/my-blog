@@ -1,5 +1,5 @@
 ---
-title: Java 集合类一
+title: Java 集合类 Overview
 date: 2020-08-30
 tags: 
   - java
@@ -461,6 +461,9 @@ NavigableSet 是 SortedSet 的子接口。它在 SortedSet 的基础上额外提
 * lower(element)：获得小于给定元素的最大值。
 * pollFirst()：返回并移除第一个元素。
 * pollLast()：返回并移除最后一个元素。
+
+ 
+ <comment/> 
 
  
  <comment/> 
