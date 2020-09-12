@@ -1,4 +1,4 @@
- ---
+---
 title: LindedList 源码分析
 date: 2020-09-12
 tags: 
@@ -13,11 +13,11 @@ location: Shenzhen
 
 * Cloneable：实例拥有字段到字段拷贝的能力，对没有实现 Cloneable 的实例执行 clone() 将会抛出 CloneNotSupportedException
 * Deque：双向队列，能够在两端对元素进行添加和移除操作。Deque 继承了 Queue，LindedList 同时也是一个 Queue
-* List：List 继承了 Iterable，ArrayList 能通过 iterator() 获取 Iterator 和使用 foreach() 遍历元素
+* List：List 继承了 Iterable，LindedList 能通过 iterator() 获取 Iterator 和使用 foreach() 遍历元素
 
 ## 内部类
 
-LindedList 的元素存在在内部类 Node 中。Node 的成员变量如下：
+LindedList 的元素存在内部类 Node 中。Node 的成员变量如下：
 
 * E item
 * Node\<E> next
@@ -157,3 +157,9 @@ LindedList 支持如下操作：
 ### 总结
 
 LindedList 由双向链表实现，它可以从头部和尾部两个方向进行元素遍历。LinkedList 插入和移除元素开销较小，只要更换前后节点的引用即可。但 LinkedList 做随机访问时性能开销较大，需要遍历大部分节点才能找到匹配元素。LinkedList 做插入和移除操作时，性能开销集中在节点访问上，访问的速度与节点所在位置会由中间向前和向后呈现出越接近两端速度越快，越接近中间速度越慢的关系。
+
+ 
+ <comment/> 
+
+ 
+ <comment/> 
