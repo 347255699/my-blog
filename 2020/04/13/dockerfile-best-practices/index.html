@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dockerfile 最佳实践 | Menfre Blog</title>
+    <meta name="description" content="该文章主要覆盖用于构建高效镜像的最佳实践建议和方法。
+
+Docker 在构建镜像时会从 Dockfile 加载指令并自动执行，Dockerfile 是一个按顺序包含有构建一个给定镜像所需要的所有指令的文本文件。当然一个 Dockerfile 需要按照指定的格式和指令集来编写。
+
+一个 Docker 镜像包含有多个只读层，这里每一个只读层都代表 Dockerfile 中的一条指令。这 ...">
+    <meta name="generator" content="VuePress 1.4.0">
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-164957843-1" async="true"></script>
+  <script>window.dataLayer = window.dataLayer || [];            function gtag(){dataLayer.push(arguments);}            gtag('js', new Date());            gtag('config', 'UA-164957843-1');</script>
+    
+    <link rel="preload" href="/assets/css/0.styles.0a94a68e.css" as="style"><link rel="preload" href="/assets/js/app.8d42fabb.js" as="script"><link rel="preload" href="/assets/js/6.aea618f8.js" as="script"><link rel="preload" href="/assets/js/4.20006588.js" as="script"><link rel="preload" href="/assets/js/17.f10c6f39.js" as="script"><link rel="preload" href="/assets/js/7.403b6e6e.js" as="script"><link rel="prefetch" href="/assets/js/1.5cbf5643.js"><link rel="prefetch" href="/assets/js/10.3ae75870.js"><link rel="prefetch" href="/assets/js/11.a447f3c3.js"><link rel="prefetch" href="/assets/js/12.0449ba3d.js"><link rel="prefetch" href="/assets/js/13.75011fc7.js"><link rel="prefetch" href="/assets/js/14.572779d4.js"><link rel="prefetch" href="/assets/js/15.d8496b36.js"><link rel="prefetch" href="/assets/js/16.3c7370c7.js"><link rel="prefetch" href="/assets/js/18.1abb8aa8.js"><link rel="prefetch" href="/assets/js/19.5ca12b0a.js"><link rel="prefetch" href="/assets/js/20.e1896da5.js"><link rel="prefetch" href="/assets/js/21.b5e744b7.js"><link rel="prefetch" href="/assets/js/22.01ca19aa.js"><link rel="prefetch" href="/assets/js/23.2aa5172f.js"><link rel="prefetch" href="/assets/js/24.92afe763.js"><link rel="prefetch" href="/assets/js/25.fad419e7.js"><link rel="prefetch" href="/assets/js/26.24545015.js"><link rel="prefetch" href="/assets/js/27.510e6dd2.js"><link rel="prefetch" href="/assets/js/28.12988af6.js"><link rel="prefetch" href="/assets/js/29.44772bc6.js"><link rel="prefetch" href="/assets/js/30.a1349a06.js"><link rel="prefetch" href="/assets/js/31.0d024f90.js"><link rel="prefetch" href="/assets/js/32.e66d53ec.js"><link rel="prefetch" href="/assets/js/33.96fc1f36.js"><link rel="prefetch" href="/assets/js/34.fd98863d.js"><link rel="prefetch" href="/assets/js/35.388ea9a8.js"><link rel="prefetch" href="/assets/js/36.1d19334a.js"><link rel="prefetch" href="/assets/js/5.ef32696c.js"><link rel="prefetch" href="/assets/js/8.c5b9daff.js"><link rel="prefetch" href="/assets/js/9.42728225.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.dd605d22.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0a94a68e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">Menfre Blog </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/tag/" class="nav-link">Tags</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">Menfre Blog </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">Tags</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        Dockerfile 最佳实践
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">Menfre</span> <span itemprop="address">   in Shenzhen</span></div> <div class="post-meta-date"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <time pubdate itemprop="datePublished" datetime="2020-04-13T00:00:00.000Z">
+      2020-04-13
+    </time></div> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-d832e844><a href="/tag/Docker" data-v-d832e844> Docker </a></li><li class="post-tag" data-v-d832e844><a href="/tag/Dockerfile" data-v-d832e844> Dockerfile </a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><p>该文章主要覆盖用于构建高效镜像的最佳实践建议和方法。</p> <p>Docker 在构建镜像时会从 <code>Dockfile</code> 加载指令并自动执行，<code>Dockerfile</code> 是一个按顺序包含有构建一个给定镜像所需要的所有指令的文本文件。当然一个 <code>Dockerfile</code> 需要按照指定的格式和指令集来编写。</p> <p>一个 Docker 镜像包含有多个只读层，这里每一个只读层都代表 <code>Dockerfile</code> 中的一条指令。这些层被组织成栈结构，每一层都基于上一层的修改叠加而来。参考 <code>Dockerfile</code> 示例：</p> <div class="language-dockerfile extra-class"><pre class="language-dockerfile"><code><span class="token keyword">FROM</span> ubuntu<span class="token punctuation">:</span>18.04
+<span class="token keyword">COPY</span> . /app
+<span class="token keyword">RUN</span> make /app
+<span class="token keyword">CMD</span> python /app/app.py
+</code></pre></div><p>每一条指令都会创建一个层：</p> <ul><li><code>FROM</code> 基于 <code>ubuntu:18.4</code> 镜像创建一个层。</li> <li><code>COPY</code> 添加来这宿主机当前目录下的文件。</li> <li><code>RUN</code> 通过 <code>make</code> 来编译应用。</li> <li><code>CMD</code> 指定需要在容器内执行的指令。</li></ul> <p>每当你运行一个镜像产生一个容器时，你都会在之前的只读层上面创建一个可写层。对于容器运行时的所有变更，包含文件写入、修改、删除都会被写入到这个可写层。</p> <p>到这里你对 docker 分层技术以及镜像是如何分层维护的就有一个比较好的概念了。这里我们可以浅谈下 Docker 是如何分层以及将多个层挂载到容器内的。</p> <p>Docker 主要通过 Linux 的 ufs 来实现，ufs(UnionFS) 是一个可以将不同文件夹的文件挂载到一个文件夹下的技术，同时会自动对文件去重。如下所示：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>/home/me/A -- a.txt b.txt
+/home/me/B -- a.txt c.txt
+
+<span class="token comment"># 仅仅是伪命令，非真实可以用</span>
+ufs ./A ./B -d ./C
+
+/home/me/C -- a.txt b.txt c.txt
+</code></pre></div><p>在我们的用户目录下有三个文件夹，分别为 A、B、C，其中 A 文件夹有 a、b 文件，B 文件夹有 a、c 文件。通过 <code>ufs</code> 技术我们可以将 A、B 文件夹的文件挂载到 C 文件夹下且自动去重。即 C 文件夹会有 a、b、c 文件，且对 C 文件夹的文件修改会在 A 和 B 对应的文件上生效。</p> <p>这就是 Docker 分层的核心技术了。</p> <h2 id="通用参考和建议"><a href="#通用参考和建议" class="header-anchor">#</a> 通用参考和建议</h2> <h3 id="创建敏捷容器"><a href="#创建敏捷容器" class="header-anchor">#</a> 创建敏捷容器</h3> <p>这里的敏捷是指启动和配置容器所需要的时间。我们通过  <code>Dockerfile</code> 创建出来的镜像要尽可能考虑容器在停止、销毁、重启和替换时启动和配置容器所需要的时长，并尽量缩短这些时长。</p> <h3 id="理解打包上下文"><a href="#理解打包上下文" class="header-anchor">#</a> 理解打包上下文</h3> <p>Docker 在构建镜像时需要一个打包上下文。我们在执行 <code>docker build</code> 时，宿主机的当前目录就是我们的打包上下文。默认的，Docker 会自动在当前目录下加载 <code>Dockerfile</code> 文件，同时也可以通过 <code>-f</code> 参数来指定 <code>Dockerfile</code> 的位置。最终不管 <code>Dockerfile</code> 在哪个地方，当前目录下的所有文件和文件夹都会作为打包上下文发送给 docker 守护进程。</p> <blockquote><p>✅ 打包上下文实例</p> <p>创建一个文件夹，并 <code>cd</code> 进入。创建一个 hello 文件并填充 <code>hello world</code> ，创建一个 <code>Dockerfile</code> 并在容器中运行 <code>cat</code> 命令。通过 <code>.</code> 打包上下文来创建镜像。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">mkdir</span> myproject <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> myproject
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;hello world&quot;</span> <span class="token operator">&gt;</span> hello
+<span class="token builtin class-name">echo</span> -e <span class="token string">&quot;FROM busybox<span class="token entity" title="\n">\n</span>COPY /hello /<span class="token entity" title="\n">\n</span>RUN cat /hello&quot;</span> <span class="token operator">&gt;</span> Dockerfile
+docker build -t helloapp:v1 <span class="token builtin class-name">.</span>
+</code></pre></div><p>移动 <code>Dockerfile</code> 和 <code>hello</code> 到另一个独立的文件夹，然后创建镜像的第二个版本(不去依赖上一个版本创建的缓存)。通过 <code>-f</code> 指定 <code>Dockerfile</code> 的路径，并指定一个文件夹作为打包上下文。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">mkdir</span> -p dockerfiles context
+<span class="token function">mv</span> Dockerfile dockerfiles <span class="token operator">&amp;&amp;</span> <span class="token function">mv</span> hello context
+docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+</code></pre></div></blockquote> <p>千万要注意不要在打包镜像时，把容器不需要的文件包含在上下文中，这样不仅会增加我们的打包时长，打包出来的镜像包也会体积过大，影响之后的 pull、push 和 容器运行时等所需要的时长。想要知道你的打包上下文有多大，可以在打包时关注如下消息：</p> <div class="language-text extra-class"><pre class="language-text"><code>Sending build context to Docker daemon  187.8MB
+</code></pre></div><h2 id="通过-stdin-来提供-dockerfile"><a href="#通过-stdin-来提供-dockerfile" class="header-anchor">#</a> 通过 stdin 来提供 Dockerfile</h2> <p>Docker 可以通过 <code>stdin</code> 来提供 <code>Dockerfile</code> ，以及提供了根据本地或远程上下文来打包镜像的能力。通过 <code>stdin</code> 来提供 <code>Dockerfile</code> 的方式对于希望在磁盘上不留下任何 <code>Dockerfile</code> 痕迹的镜像打包非常有用。</p> <blockquote><p>✅ ​这里的 Demo 提供了较为方便的方法来使用 <code>stdin</code>，但任何能够通过 <code>stdin</code> 提供 <code>Dockerfile</code> 方法都是可取的。</p> <p>如下所示，两种方式达到的效果是相同的。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token builtin class-name">echo</span> -e <span class="token string">'FROM busybox<span class="token entity" title="\n">\n</span>RUN echo &quot;hello world&quot;'</span> <span class="token operator">|</span> docker build -
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code>docker build -<span class="token operator">&lt;&lt;</span><span class="token string">EOF
+FROM busybox
+RUN echo &quot;hello world&quot;
+EOF</span>
+</code></pre></div><p>你可以选择你喜欢的方式来替换这里的例子，寻找最适合你的方式。如可以通过可编程来编写 <code>Dockerfile</code> 等。</p></blockquote> <h3 id="使用-stdin-提供-dockerfile-的方式且不发送上下文来构建镜像"><a href="#使用-stdin-提供-dockerfile-的方式且不发送上下文来构建镜像" class="header-anchor">#</a> 使用 stdin 提供 Dockerfile 的方式且不发送上下文来构建镜像</h3> <p>该方式通过如下语法来使用。使用 <code>-</code> 占位符来取代打包上下文的路径，还有引导 docker 通过 <code>stdin</code> 的方式来加载 <code>Dockerfile</code>。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>docker build <span class="token punctuation">[</span>OPTIONS<span class="token punctuation">]</span> -
+</code></pre></div><p>以下例子通过 <code>stdin</code> 来加载 <code>Dockerfile</code> 。没有给守护进程发送任何上下文文件。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>docker build -t myimage:latest -<span class="token operator">&lt;&lt;</span><span class="token string">EOF
+FROM busybox
+RUN echo &quot;hello world&quot;
+EOF</span>
+</code></pre></div><p>省略上下文的方式适合 <code>Dockerfile</code> 不需要拷贝文件到镜像里的情况。这样可以加速镜像打包，因为不需要给守护进程发送任何东西。</p> <blockquote><p>✅ 注意：当前语法下在 <code>Dockerfile</code> 中使用 <code>COPY</code> 和 <code>ADD</code> 会报错。如下所示：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># create a directory to work in</span>
+<span class="token function">mkdir</span> example
+<span class="token builtin class-name">cd</span> example
+
+<span class="token comment"># create an example file</span>
+<span class="token function">touch</span> somefile.txt
+
+docker build -t myimage:latest -<span class="token operator">&lt;&lt;</span><span class="token string">EOF
+FROM busybox
+COPY somefile.txt .
+RUN cat /somefile.txt
+EOF</span>
+
+<span class="token comment"># observe that the build fails</span>
+<span class="token punctuation">..</span>.
+Step <span class="token number">2</span>/3 <span class="token builtin class-name">:</span> COPY somefile.txt <span class="token builtin class-name">.</span>
+COPY failed: <span class="token function">stat</span> /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such <span class="token function">file</span> or directory
+</code></pre></div></blockquote> <h3 id="使用本地本地打包上下文和-stdin-方式提供dockerfile"><a href="#使用本地本地打包上下文和-stdin-方式提供dockerfile" class="header-anchor">#</a> 使用本地本地打包上下文和 stdin 方式提供dockerfile</h3> <p>使用 <code>-f</code> 或 <code>--file</code> 参数来指定 <code>Dockerfile</code> ，使用 <code>-</code> 作为参数值来引导 docker 从 <code>stdin</code> 来加载 <code>dockerfile</code> 。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>docker build <span class="token punctuation">[</span>OPTIONS<span class="token punctuation">]</span> -f- <span class="token environment constant">PATH</span>
+</code></pre></div><p>以下实例使用当前目录 <code>·</code> 作为打包上下文，使用 <code>stdin</code> 来加载 <code>dockerfile</code> 。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># create a directory to work in</span>
+<span class="token function">mkdir</span> example
+<span class="token builtin class-name">cd</span> example
+
+<span class="token comment"># create an example file</span>
+<span class="token function">touch</span> somefile.txt
+
+<span class="token comment"># build an image using the current directory as context, and a Dockerfile passed through stdin</span>
+docker build -t myimage:latest -f- <span class="token builtin class-name">.</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+FROM busybox
+COPY somefile.txt .
+RUN cat /somefile.txt
+EOF</span>
+</code></pre></div><h3 id="使用远程打包上下文和-stdin-方式提供-dockerfile"><a href="#使用远程打包上下文和-stdin-方式提供-dockerfile" class="header-anchor">#</a> 使用远程打包上下文和 stdin 方式提供 dockerfile</h3> <p>使用如下语法从远程 <code>git</code> 仓库加载文件作为上下文，使用 <code>stdin</code> 加载 <code>dockerfile</code>。使用 <code>-f</code> 或 <code>--file</code> 参数来指定 <code>dockerfile</code>，使用 <code>-</code> 作为参数值来指引 docker 从 <code>stdin</code> 加载 <code>dockerfile</code>。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>docker build <span class="token punctuation">[</span>OPTIONS<span class="token punctuation">]</span> -f- <span class="token environment constant">PATH</span>
+</code></pre></div><p>这种方式对于希望从远程加载上下文但上下文中不包含 <code>dockerfile</code> 的情况，或是从其他仓库 fork 上下文并希望定制自己的 <code>dockerfile</code> 的情况。</p> <p>以下实例从 <code>stdin</code> 加载 <code>dockerfile</code>，并从远程 <code>git</code> 仓库添加 <code>hello.c</code>。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+FROM busybox
+COPY hello.c .
+EOF</span>
+</code></pre></div><blockquote><p>✅ 需要注意的地方</p> <p>当使用远程仓库作为打包上下文时，docker 会执行 <code>git clone</code> 克隆仓库到本地，并把这些文件作为上下文提交给 守护进程。当你使用这种方式打包时，需要在本机安装有 <code>git</code>。</p></blockquote> <h3 id="通过-dockerignore-来忽略打包文件"><a href="#通过-dockerignore-来忽略打包文件" class="header-anchor">#</a> 通过 . dockerignore 来忽略打包文件</h3> <p><code>.gitignore</code> 大家很熟悉了吧，这里 <code>.dockerignore</code> 跟它一样，很多 <code>.gitignore</code> 的语法都适用于 <code>.dockerignore</code>。</p> <h3 id="使用多阶段的构建方案"><a href="#使用多阶段的构建方案" class="header-anchor">#</a> 使用多阶段的构建方案</h3> <p>多阶段构建允许你大幅度降低最终打包出来的镜像大小，而不需要大幅度减少中间层和文件的数量。</p> <p>因为镜像是在生成过程的最后阶段生成的，因此你可以通过平衡打包缓存来最小化镜像层的数量。</p> <p>举个例子，如果你的构建有多个层，你可以按照最小改动到最大改动的的顺序来排列。</p> <ul><li>安装构建应用所需要的工具</li> <li>安装或更新依赖库</li> <li>生成应用</li></ul> <p>一个 Go 应用的 Dockerfile 长这样：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>FROM golang:1.11-alpine AS build
+
+<span class="token comment"># Install tools required for project</span>
+<span class="token comment"># Run `docker build --no-cache .` to update dependencies</span>
+RUN apk <span class="token function">add</span> --no-cache <span class="token function">git</span>
+RUN go get github.com/golang/dep/cmd/dep
+
+<span class="token comment"># List project dependencies with Gopkg.toml and Gopkg.lock</span>
+<span class="token comment"># These layers are only re-built when Gopkg files are updated</span>
+COPY Gopkg.lock Gopkg.toml /go/src/project/
+WORKDIR /go/src/project/
+<span class="token comment"># Install library dependencies</span>
+RUN dep ensure -vendor-only
+
+<span class="token comment"># Copy the entire project and build it</span>
+<span class="token comment"># This layer is rebuilt when a file changes in the project directory</span>
+COPY <span class="token builtin class-name">.</span> /go/src/project/
+RUN go build -o /bin/project
+
+<span class="token comment"># This results in a single layer image</span>
+FROM scratch
+COPY --from<span class="token operator">=</span>build /bin/project /bin/project
+ENTRYPOINT <span class="token punctuation">[</span><span class="token string">&quot;/bin/project&quot;</span><span class="token punctuation">]</span>
+CMD <span class="token punctuation">[</span><span class="token string">&quot;--help&quot;</span><span class="token punctuation">]</span>
+</code></pre></div><h2 id="不要安装不需要的包"><a href="#不要安装不需要的包" class="header-anchor">#</a> 不要安装不需要的包</h2> <p>为了降低复杂性，减少依赖数量、文件大小和构建时间，应该尽量避免安装一些额外的不需要的包，不要因为应用很 nice 值得拥有就去安装它，要考虑实际用途。比如在数据库镜像中安装文本编辑器。</p> <h2 id="应用解耦"><a href="#应用解耦" class="header-anchor">#</a> 应用解耦</h2> <p>解耦是一个老生长谈的话题了。每个镜像必须只有一个职责(单一责任). 在多个容器中采用应用解耦的方式有利于水平扩展和容器复用。举个例子，一个 web 站点可能需要包含三个独立的容器，每一个容器都是一个独一无二的镜像，实现这样一个解耦的模式需要一个 Web 应用管理容器，一个数据库容器和一个内存级缓存容器。</p> <p>限制一个容器只有一个进程是一个黄金法则，但它也不是强制的。比如，包含但不限于一个 <code>init</code> 进程派生多个子进程，一个需要额外添加多个实例进程以作为一个整体对外提供服务的情况。举个例子，<code>Celery</code> 需要派生多个 <code>worker</code> 进程，<code>Apache</code> 需要为每个请求创建一个进程。</p> <p>根据你自身的判断尽可能保证容器的模块化和简洁。如果容器间互相依赖，你可以使用 Docker 容器网络让这些容器彼此间实现通讯。</p> <h2 id="最小化镜像层的数量"><a href="#最小化镜像层的数量" class="header-anchor">#</a> 最小化镜像层的数量</h2> <p>旧版的 Docker中，你需要最小化镜像层的数量来提升镜像的性能。</p> <p>下面这些特性可以用来减少这些限制：</p> <ul><li>只有 <code>RUN</code>, <code>COPY</code>, <code>ADD</code> 会创建镜像层。其他指令只会生成临时的中间层，并不会增加最终打包出来镜像的大小。</li> <li>尽可能使用多阶段的构建方案，还有只靠背你需要的内容到你的镜像中。这些允许你包含工具和调试信息在你的中间层中，而不会增加最终打包出来的镜像大小。</li></ul> <h2 id="排序的多行参数"><a href="#排序的多行参数" class="header-anchor">#</a> 排序的多行参数</h2> <p>无论何时，使用字典序多行参数能为之后的更改提供便利。这里有利于避免重复安装包和让列表易于更新。同样也利于 PRs(Pull Request) 的阅读和审核。在 \ 前加空格是一个不错的方法。</p> <p>这个例子来自于 <a href="https://github.com/docker-library/buildpack-deps" target="_blank" rel="noopener noreferrer"><code>buildpack-deps</code> image<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>RUN <span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y <span class="token punctuation">\</span>
+  bzr <span class="token punctuation">\</span>
+  cvs <span class="token punctuation">\</span>
+  <span class="token function">git</span> <span class="token punctuation">\</span>
+  mercurial <span class="token punctuation">\</span>
+  subversion
+</code></pre></div><h2 id="平衡打包缓存"><a href="#平衡打包缓存" class="header-anchor">#</a> 平衡打包缓存</h2> <p>当打包一个镜像时，Docker 会根据  <code>Dockerfile</code> 中的指令按照顺序逐条执行。当一个执行通过验证时，Docker 会优先在缓存中寻找它能够复用的镜像，而不是马上去创建一个新的镜像。如果你不想使用缓存，可以通过 <code>docker build</code> 的 <code>--no-cahe=true</code> 来关闭。然而，如果你希望让 Docker 使用缓存，那么你就有必要关心 Docker 什么时候能够找到一个符合的镜像缓存而什么时候不能了。Docker 所遵循的规则如下陈述：</p> <ul><li>当你通过已经存在于缓存中的父镜像来构建缓存时，下一条指令会与所有由同一个父镜像派生出来的子镜像逐个比较，如果发现其中有一个镜像所使用的指令与当前的一致，则缓存命中，否则无可用缓存。</li> <li>大多数情况下，只要简单的与一个子镜像比较 <code>Dockerfile</code> 中的指令就足够了。而少数指令是需要多次验证和解析的。</li> <li>对于 <code>ADD</code> 和 <code>COPY</code> 指令，镜像中的每一个文件都会经过验证和计算从而得到一个验证总和。这些文件的校验总和不考虑最后修改和访问时间。在检索缓存的过程中，当前的校验总和会与已经存在的镜像的文件校验总和做比较。如果文件有任何改动，包含内容和元数据，缓存都会失效。</li> <li>除了 <code>ADD</code> 和 <code>COPY</code> 命令外，缓存检查不会通过查看容器中的文件来判断是否命中缓存。举个列子，当执行一个 <code>Run apt-get -y update</code> 指令时，并不能通过比较容器中的文件是否修改来判断缓存命中。只能通过命令本身的字符串来判断是否命中。</li></ul> <p>一旦缓存无效，那么 Dockerfile 中接下来的指令都会生成新的镜像而不适用缓存。</p> <div class="gitalk-container"><div id="gitalk-container"></div></div></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#通用参考和建议" title="通用参考和建议">通用参考和建议</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#创建敏捷容器" title="创建敏捷容器">创建敏捷容器</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#理解打包上下文" title="理解打包上下文">理解打包上下文</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#通过-stdin-来提供-dockerfile" title="通过 stdin 来提供 Dockerfile">通过 stdin 来提供 Dockerfile</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#使用-stdin-提供-dockerfile-的方式且不发送上下文来构建镜像" title="使用 stdin 提供 Dockerfile 的方式且不发送上下文来构建镜像">使用 stdin 提供 Dockerfile 的方式且不发送上下文来构建镜像</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#使用本地本地打包上下文和-stdin-方式提供dockerfile" title="使用本地本地打包上下文和 stdin 方式提供dockerfile">使用本地本地打包上下文和 stdin 方式提供dockerfile</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#使用远程打包上下文和-stdin-方式提供-dockerfile" title="使用远程打包上下文和 stdin 方式提供 dockerfile">使用远程打包上下文和 stdin 方式提供 dockerfile</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#通过-dockerignore-来忽略打包文件" title="通过 . dockerignore 来忽略打包文件">通过 . dockerignore 来忽略打包文件</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#使用多阶段的构建方案" title="使用多阶段的构建方案">使用多阶段的构建方案</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#不要安装不需要的包" title="不要安装不需要的包">不要安装不需要的包</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#应用解耦" title="应用解耦">应用解耦</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#最小化镜像层的数量" title="最小化镜像层的数量">最小化镜像层的数量</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#排序的多行参数" title="排序的多行参数">排序的多行参数</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#平衡打包缓存" title="平衡打包缓存">平衡打包缓存</a></div></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="https://github.com/347255699" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-fdbf4940><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="/2020/04/13/dockerfile-best-practices/.html" class="nav-link" data-v-fdbf4940>Copyright © 2020 Menfre Blog.</a></li></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.8d42fabb.js" defer></script><script src="/assets/js/6.aea618f8.js" defer></script><script src="/assets/js/4.20006588.js" defer></script><script src="/assets/js/17.f10c6f39.js" defer></script><script src="/assets/js/7.403b6e6e.js" defer></script>
+  </body>
+</html>

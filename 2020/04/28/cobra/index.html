@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cobra 入门 | Menfre Blog</title>
+    <meta name="description" content="Cobra 是 Golang 中用来创建 CLI 应用的框架，Cobra 本身也是一个应用，用于创建 CLI 应用脚手架。
+
+Quicky Start:
+
+go get -u github.com/spf13/cobra/cobra
+
+几个重要概念
+
+Cobra 中有几个比较重要的概念。
+
+commands：行为
+arguments：命令行参数
+flag ...">
+    <meta name="generator" content="VuePress 1.4.0">
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-164957843-1" async="true"></script>
+  <script>window.dataLayer = window.dataLayer || [];            function gtag(){dataLayer.push(arguments);}            gtag('js', new Date());            gtag('config', 'UA-164957843-1');</script>
+    
+    <link rel="preload" href="/assets/css/0.styles.0a94a68e.css" as="style"><link rel="preload" href="/assets/js/app.8d42fabb.js" as="script"><link rel="preload" href="/assets/js/6.aea618f8.js" as="script"><link rel="preload" href="/assets/js/4.20006588.js" as="script"><link rel="preload" href="/assets/js/18.1abb8aa8.js" as="script"><link rel="preload" href="/assets/js/7.403b6e6e.js" as="script"><link rel="prefetch" href="/assets/js/1.5cbf5643.js"><link rel="prefetch" href="/assets/js/10.3ae75870.js"><link rel="prefetch" href="/assets/js/11.a447f3c3.js"><link rel="prefetch" href="/assets/js/12.0449ba3d.js"><link rel="prefetch" href="/assets/js/13.75011fc7.js"><link rel="prefetch" href="/assets/js/14.572779d4.js"><link rel="prefetch" href="/assets/js/15.d8496b36.js"><link rel="prefetch" href="/assets/js/16.3c7370c7.js"><link rel="prefetch" href="/assets/js/17.f10c6f39.js"><link rel="prefetch" href="/assets/js/19.5ca12b0a.js"><link rel="prefetch" href="/assets/js/20.e1896da5.js"><link rel="prefetch" href="/assets/js/21.b5e744b7.js"><link rel="prefetch" href="/assets/js/22.01ca19aa.js"><link rel="prefetch" href="/assets/js/23.2aa5172f.js"><link rel="prefetch" href="/assets/js/24.92afe763.js"><link rel="prefetch" href="/assets/js/25.fad419e7.js"><link rel="prefetch" href="/assets/js/26.24545015.js"><link rel="prefetch" href="/assets/js/27.510e6dd2.js"><link rel="prefetch" href="/assets/js/28.12988af6.js"><link rel="prefetch" href="/assets/js/29.44772bc6.js"><link rel="prefetch" href="/assets/js/30.a1349a06.js"><link rel="prefetch" href="/assets/js/31.0d024f90.js"><link rel="prefetch" href="/assets/js/32.e66d53ec.js"><link rel="prefetch" href="/assets/js/33.96fc1f36.js"><link rel="prefetch" href="/assets/js/34.fd98863d.js"><link rel="prefetch" href="/assets/js/35.388ea9a8.js"><link rel="prefetch" href="/assets/js/36.1d19334a.js"><link rel="prefetch" href="/assets/js/5.ef32696c.js"><link rel="prefetch" href="/assets/js/8.c5b9daff.js"><link rel="prefetch" href="/assets/js/9.42728225.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.dd605d22.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0a94a68e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">Menfre Blog </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/tag/" class="nav-link">Tags</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">Menfre Blog </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">Tags</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        Cobra 入门
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">Menfre</span> <span itemprop="address">   in Jieyang</span></div> <div class="post-meta-date"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <time pubdate itemprop="datePublished" datetime="2020-04-28T00:00:00.000Z">
+      2020-04-28
+    </time></div> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-d832e844><a href="/tag/Go" data-v-d832e844> Go </a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><p>Cobra 是 Golang 中用来创建 CLI 应用的框架，Cobra 本身也是一个应用，用于创建 CLI 应用脚手架。</p> <p>Quicky Start:</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get -u github.com/spf13/cobra/cobra
+</code></pre></div><h2 id="几个重要概念"><a href="#几个重要概念" class="header-anchor">#</a> 几个重要概念</h2> <p>Cobra 中有几个比较重要的概念。</p> <ul><li>commands：行为</li> <li>arguments：命令行参数</li> <li>flags：命令行选项</li></ul> <p>执行命令行的一般格式为：</p> <p>APPNAME COMMAND ARG --FLAG</p> <p>如下所示：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># server 是 command, port 是 flag</span>
+hugo server --port<span class="token operator">=</span><span class="token number">1313</span>
+
+<span class="token comment"># clone 是 command, URL 是 argument, bare 是 flags</span>
+<span class="token function">git</span> clone URL --bare
+</code></pre></div><p>一个拥有较多功能的 CLI 应用可以根据功能被划分为多个 command。command 又有自己的可选项和接收参数。</p> <h2 id="创建-cobra-应用"><a href="#创建-cobra-应用" class="header-anchor">#</a> 创建 Cobra 应用</h2> <p>前面我们说了，cobra 是一个创建 CLI 应用脚手架的应用。因此我们用它来创建我们自己的 CLI 应用</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> ~/workbench/gobench/src <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> cobrademo
+
+<span class="token comment"># 创建应用</span>
+cobra init cobrademo --pkg-name cobrademo
+<span class="token builtin class-name">cd</span> cobrademo/ <span class="token operator">&amp;&amp;</span> <span class="token function">ls</span>
+</code></pre></div><p>创建成功后，你能看到如下目录：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>LICENSE	cmd	main.go
+</code></pre></div><p>这个时候我们用 IDE 打开一下。</p> <p><img src="/image/cobra-structure.jpg" alt="project-structure"></p> <p>Cobra 创建的目录中没有 go.mod，这里我们可以执行如下命令手动创建并更新依赖。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go mod init <span class="token operator">&amp;&amp;</span> go mod tidy
+</code></pre></div><p>接下来我们执行程序可以看到如下信息：</p> <div class="language-text extra-class"><pre class="language-text"><code>examples and usage of using your application. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.
+</code></pre></div><h2 id="创建-commands"><a href="#创建-commands" class="header-anchor">#</a> 创建 Commands</h2> <p>Ok，这时我们的 CLI 应用还没有任何 commands，我们可以用 Cobra 来创建。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>cobra <span class="token function">add</span> serve
+cobra <span class="token function">add</span> gen
+</code></pre></div><p>创建完成后你会看到在 /cmd 文件夹中多了两个 go 源码文件，gen.go 和 serve.go。</p> <h3 id="添加具体功能"><a href="#添加具体功能" class="header-anchor">#</a> 添加具体功能</h3> <p>接下里我们需要为这两个 commands 编写功能。</p> <p>我们打开 gen.go 如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> cmd
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">&quot;fmt&quot;</span>
+
+	<span class="token string">&quot;github.com/spf13/cobra&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// genCmd represents the gen command</span>
+<span class="token keyword">var</span> genCmd <span class="token operator">=</span> <span class="token operator">&amp;</span>cobra<span class="token punctuation">.</span>Command<span class="token punctuation">{</span>
+	Use<span class="token punctuation">:</span>   <span class="token string">&quot;gen&quot;</span><span class="token punctuation">,</span>
+	Short<span class="token punctuation">:</span> <span class="token string">&quot;A brief description of your command&quot;</span><span class="token punctuation">,</span>
+	Long<span class="token punctuation">:</span> <span class="token string">`A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`</span><span class="token punctuation">,</span>
+	Run<span class="token punctuation">:</span> <span class="token keyword">func</span><span class="token punctuation">(</span>cmd <span class="token operator">*</span>cobra<span class="token punctuation">.</span>Command<span class="token punctuation">,</span> args <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Your input are %s\n&quot;</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	rootCmd<span class="token punctuation">.</span><span class="token function">AddCommand</span><span class="token punctuation">(</span>genCmd<span class="token punctuation">)</span>
+
+	<span class="token comment">// Here you will define your flags and configuration settings.</span>
+
+	<span class="token comment">// Cobra supports Persistent Flags which will work for this command</span>
+	<span class="token comment">// and all subcommands, e.g.:</span>
+	<span class="token comment">// genCmd.PersistentFlags().String(&quot;foo&quot;, &quot;&quot;, &quot;A help for foo&quot;)</span>
+
+	<span class="token comment">// Cobra supports local flags which will only run when this command</span>
+	<span class="token comment">// is called directly, e.g.:</span>
+	<span class="token comment">// genCmd.Flags().BoolP(&quot;toggle&quot;, &quot;t&quot;, false, &quot;Help message for toggle&quot;)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>可以看到 genCmd 中的 Run 函数，我们需要在这里添加具体的功能。这里我们原样输出 gen 命令的参数。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 编译一下</span>
+go build
+./cobrademo gen helle world
+</code></pre></div><p>你会得到如下结果：</p> <div class="language-text extra-class"><pre class="language-text"><code>Your input are [helle world]
+</code></pre></div><h2 id="创建-flags"><a href="#创建-flags" class="header-anchor">#</a> 创建 flags</h2> <p>前面我们创建两个 commands，接下来我们可以为这两个 commands 创建 flags。</p> <p>根据不同作用域，flags 可以分层两类：</p> <ul><li><strong>persistent</strong>：全局</li> <li><strong>local</strong>：局部</li></ul> <p>persistent 类型的 flags 可以分配给一个父 cmd，这样这个 flag 对于此 cmd 下的所有子 cmd 都是可用的。如果需要分配一个全局 flag，可以分配给 rootCmd。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">var</span> Verbose <span class="token builtin">bool</span>
+rootCmd<span class="token punctuation">.</span><span class="token function">PersistentFlags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">BoolVarP</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>Verbose<span class="token punctuation">,</span> <span class="token string">&quot;verbose&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;v&quot;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">&quot;verbose output&quot;</span><span class="token punctuation">)</span>
+</code></pre></div><p>local 类型的 flags 只能分配给指定的 cmd。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">var</span> Source <span class="token builtin">string</span>
+localCmd<span class="token punctuation">.</span><span class="token function">Flags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">StringVarP</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>Source<span class="token punctuation">,</span> <span class="token string">&quot;source&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;s&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Source directory to read from&quot;</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="参数校验器"><a href="#参数校验器" class="header-anchor">#</a> 参数校验器</h2> <p>Cobra 提供了一组参数用于快速校验命令的参数。</p> <ul><li>NoArgs - 如果存在任何位置参数，该命令将报错</li> <li>ArbitraryArgs - 该命令会接受任何位置参数</li> <li>OnlyValidArgs - 如果有任何位置参数不在命令的 ValidArgs 字段中，该命令将报错</li> <li>MinimumNArgs(int) - 至少要有 N 个位置参数，否则报错</li> <li>MaximumNArgs(int) - 如果位置参数超过 N 个将报错</li> <li>ExactArgs(int) - 必须有 N 个位置参数，否则报错</li> <li>ExactValidArgs(int) 必须有 N 个位置参数，且都在命令的 ValidArgs 字段中，否则报错</li> <li>RangeArgs(min, max) - 如果位置参数的个数不在区间 min 和 max 之中，报错</li></ul> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">var</span> cmdTimes <span class="token operator">=</span> <span class="token operator">&amp;</span>cobra<span class="token punctuation">.</span>Command<span class="token punctuation">{</span>
+    Use<span class="token punctuation">:</span> …
+    Short<span class="token punctuation">:</span> …
+    Long<span class="token punctuation">:</span> …
+    Args<span class="token punctuation">:</span> cobra<span class="token punctuation">.</span><span class="token function">MinimumNArgs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    Run<span class="token punctuation">:</span> …
+<span class="token punctuation">}</span>
+</code></pre></div><p>让然你也可以添加一个 func(cmd *cobra.Command, args []string) error {} 作为参数校验器。</p> <p>Ok，到这里我们基本掌握如何使用 Cobra 了。</p> <h2 id="参考资料"><a href="#参考资料" class="header-anchor">#</a> 参考资料</h2> <ol><li><a href="https://github.com/spf13/cobra" target="_blank" rel="noopener noreferrer">cobra官方<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://www.cnblogs.com/sparkdev/p/10856077.html" target="_blank" rel="noopener noreferrer">sparkdev<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ol> <div class="gitalk-container"><div id="gitalk-container"></div></div> <div class="gitalk-container"><div id="gitalk-container"></div></div></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#几个重要概念" title="几个重要概念">几个重要概念</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#创建-cobra-应用" title="创建 Cobra 应用">创建 Cobra 应用</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#创建-commands" title="创建 Commands">创建 Commands</a></div><div class="vuepress-toc-item vuepress-toc-h3"><a href="#添加具体功能" title="添加具体功能">添加具体功能</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#创建-flags" title="创建 flags">创建 flags</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#参数校验器" title="参数校验器">参数校验器</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#参考资料" title="参考资料">参考资料</a></div></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="https://github.com/347255699" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-fdbf4940><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="/2020/04/28/cobra/.html" class="nav-link" data-v-fdbf4940>Copyright © 2020 Menfre Blog.</a></li></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.8d42fabb.js" defer></script><script src="/assets/js/6.aea618f8.js" defer></script><script src="/assets/js/4.20006588.js" defer></script><script src="/assets/js/18.1abb8aa8.js" defer></script><script src="/assets/js/7.403b6e6e.js" defer></script>
+  </body>
+</html>

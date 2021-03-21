@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kubernetes 环境安装 | Menfre Blog</title>
+    <meta name="description" content="使用 docker 和 docker-compose 也有一段时间了，终于挤出时间把 k8s 安排上了。:dog:
+
+这里我在物理机上开了两台 ubuntu18 虚拟机用于搭建 k8s 环境。一台作为控制平面，一台作为工作机。
+
+首先我们需要确保机器上安装有 docker，关于 docker 如何安装就不再赘述；直奔主题。
+
+安装 k8s 组件
+
+国内安装 k8s 还是十分不方便的，这里我们 ...">
+    <meta name="generator" content="VuePress 1.4.0">
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-164957843-1" async="true"></script>
+  <script>window.dataLayer = window.dataLayer || [];            function gtag(){dataLayer.push(arguments);}            gtag('js', new Date());            gtag('config', 'UA-164957843-1');</script>
+    
+    <link rel="preload" href="/assets/css/0.styles.0a94a68e.css" as="style"><link rel="preload" href="/assets/js/app.8d42fabb.js" as="script"><link rel="preload" href="/assets/js/6.aea618f8.js" as="script"><link rel="preload" href="/assets/js/4.20006588.js" as="script"><link rel="preload" href="/assets/js/26.24545015.js" as="script"><link rel="preload" href="/assets/js/7.403b6e6e.js" as="script"><link rel="prefetch" href="/assets/js/1.5cbf5643.js"><link rel="prefetch" href="/assets/js/10.3ae75870.js"><link rel="prefetch" href="/assets/js/11.a447f3c3.js"><link rel="prefetch" href="/assets/js/12.0449ba3d.js"><link rel="prefetch" href="/assets/js/13.75011fc7.js"><link rel="prefetch" href="/assets/js/14.572779d4.js"><link rel="prefetch" href="/assets/js/15.d8496b36.js"><link rel="prefetch" href="/assets/js/16.3c7370c7.js"><link rel="prefetch" href="/assets/js/17.f10c6f39.js"><link rel="prefetch" href="/assets/js/18.1abb8aa8.js"><link rel="prefetch" href="/assets/js/19.5ca12b0a.js"><link rel="prefetch" href="/assets/js/20.e1896da5.js"><link rel="prefetch" href="/assets/js/21.b5e744b7.js"><link rel="prefetch" href="/assets/js/22.01ca19aa.js"><link rel="prefetch" href="/assets/js/23.2aa5172f.js"><link rel="prefetch" href="/assets/js/24.92afe763.js"><link rel="prefetch" href="/assets/js/25.fad419e7.js"><link rel="prefetch" href="/assets/js/27.510e6dd2.js"><link rel="prefetch" href="/assets/js/28.12988af6.js"><link rel="prefetch" href="/assets/js/29.44772bc6.js"><link rel="prefetch" href="/assets/js/30.a1349a06.js"><link rel="prefetch" href="/assets/js/31.0d024f90.js"><link rel="prefetch" href="/assets/js/32.e66d53ec.js"><link rel="prefetch" href="/assets/js/33.96fc1f36.js"><link rel="prefetch" href="/assets/js/34.fd98863d.js"><link rel="prefetch" href="/assets/js/35.388ea9a8.js"><link rel="prefetch" href="/assets/js/36.1d19334a.js"><link rel="prefetch" href="/assets/js/5.ef32696c.js"><link rel="prefetch" href="/assets/js/8.c5b9daff.js"><link rel="prefetch" href="/assets/js/9.42728225.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.dd605d22.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0a94a68e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">Menfre Blog </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/tag/" class="nav-link">Tags</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">Menfre Blog </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">Tags</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        Kubernetes 环境安装
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">Menfre</span> <span itemprop="address">   in Shenzhen</span></div> <div class="post-meta-date"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <time pubdate itemprop="datePublished" datetime="2020-08-22T00:00:00.000Z">
+      2020-08-22
+    </time></div> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-d832e844><a href="/tag/k8s" data-v-d832e844> k8s </a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><p>使用 docker 和 docker-compose 也有一段时间了，终于挤出时间把 k8s 安排上了。🐶</p> <p>这里我在物理机上开了两台 ubuntu18 虚拟机用于搭建 k8s 环境。一台作为控制平面，一台作为工作机。</p> <p>首先我们需要确保机器上安装有 docker，关于 docker 如何安装就不再赘述；直奔主题。</p> <h2 id="安装-k8s-组件"><a href="#安装-k8s-组件" class="header-anchor">#</a> 安装 k8s 组件</h2> <p>国内安装 k8s 还是十分不方便的，这里我们使用 aliyun apt source 来加速安装过程。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 先切换为 root，接下来大部分流程都需要在 root 下面完成</span>
+<span class="token function">sudo</span> <span class="token function">su</span>
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">apt-get</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">apt-get</span> <span class="token function">install</span> -y apt-transport-https
+<span class="token function">curl</span> https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg <span class="token operator">|</span> apt-key <span class="token function">add</span> - 
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span>EOF <span class="token operator">&gt;</span>/etc/apt/sources.list.d/kubernetes.list
+deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+EOF  
+<span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> -y kubelet kubeadm kubectl
+</code></pre></div><blockquote><p>因为咱们是萌新，所以还是使用 kubeadm 这种傻瓜式工具来安装。</p></blockquote> <h2 id="kubeadm-init"><a href="#kubeadm-init" class="header-anchor">#</a> kubeadm init</h2> <p>初始化 k8s 环境前我们需要先准备下。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 关闭 swap</span>
+swapoff -a
+</code></pre></div><p>设置 cgroup driver 为 systemd，默认 docker 使用的是 cgroupfs。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">vim</span> /etc/docker/daemon.json
+</code></pre></div><p>插入如下 json:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;exec-opts&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code>systemctl restart docker
+</code></pre></div><p>默认 kubeadm 会到 google 仓库去拉取静态 pod 使用到的镜像，因为墙的关系，我们需要提前从别处拉取镜像。</p> <p>这里我只找到一个合适的仓库：</p> <div class="language-http extra-class"><pre class="language-http"><code>registry.aliyuncs.com/google_containers
+</code></pre></div><p>接下我们我们先观察下 kubeadm 需要使用到的镜像列表:</p> <div class="language-shell extra-class"><pre class="language-shell"><code>menfre@master:~$ kubeadm config images list
+k8s.gcr.io/kube-apiserver:v1.20.2
+k8s.gcr.io/kube-controller-manager:v1.20.2
+k8s.gcr.io/kube-scheduler:v1.20.2
+k8s.gcr.io/kube-proxy:v1.20.2
+k8s.gcr.io/pause:3.2
+k8s.gcr.io/etcd:3.4.13-0
+k8s.gcr.io/coredns:1.7.0
+</code></pre></div><p>Ok, 我们知道 kubeadm 会用到哪些镜像后就可以提前拉取了，这里我们通过如下脚本来完成这个动作：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">vim</span> ~/pull.sh
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token assign-left variable">images</span><span class="token operator">=</span><span class="token punctuation">(</span>
+    kube-apiserver:v1.18.6
+    kube-controller-manager:v1.18.6
+    kube-scheduler:v1.18.6
+    kube-proxy:v1.18.6
+    pause:3.2
+    etcd:3.4.3-0
+    coredns:1.6.7
+<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">imageName</span> <span class="token keyword">in</span> <span class="token variable">${images<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span> <span class="token punctuation">;</span> <span class="token keyword">do</span>
+    docker pull googlecontainersmirror/<span class="token variable">$imageName</span>
+    docker tag googlecontainersmirror/<span class="token variable">$imageName</span> k8s.gcr.io/<span class="token variable">$imageName</span>
+<span class="token keyword">done</span>
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code>./pull.sh
+</code></pre></div><p>这个脚本帮我们做了两件事，它帮我们拉取了目标镜像，然后通过 docker tag 将镜像的名字还原成 k8s.gcr.io 前缀。</p> <p>开始 init：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>kubeadm init --pod-network-cidr<span class="token operator">=</span><span class="token number">10.244</span>.0.0/16
+</code></pre></div><blockquote><p>切记这里一定要分配 pod 网段，不然接下来安装 flannel 网络插件将无法成功。</p></blockquote> <p>顺利的话你会见到如下信息，记得备份起来。</p> <div class="language-sh extra-class"><pre class="language-sh"><code>Your Kubernetes control-plane has initialized successfully<span class="token operator">!</span>
+
+To start using your cluster, you need to run the following as a regular user:
+
+  <span class="token function">mkdir</span> -p <span class="token environment constant">$HOME</span>/.kube
+  <span class="token function">sudo</span> <span class="token function">cp</span> -i /etc/kubernetes/admin.conf <span class="token environment constant">$HOME</span>/.kube/config
+  <span class="token function">sudo</span> <span class="token function">chown</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> -u<span class="token variable">)</span></span><span class="token builtin class-name">:</span><span class="token variable"><span class="token variable">$(</span><span class="token function">id</span> -g<span class="token variable">)</span></span> <span class="token environment constant">$HOME</span>/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run <span class="token string">&quot;kubectl apply -f [podnetwork].yaml&quot;</span> with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can <span class="token function">join</span> any number of worker nodes by running the following on each as root:
+
+kubeadm <span class="token function">join</span> <span class="token number">192.168</span>.3.46:6443 --token huosj5.krvkm8dr9olvyutw <span class="token punctuation">\</span>
+    --discovery-token-ca-cert-hash sha256:609c8eb6dd96c62bc6f27e52fc9be91bfe08f80be99e7a5bae86ee65c4b3d675
+</code></pre></div><blockquote><p>kubeadm init 大概帮我们完成如下事情。</p> <ul><li>预检查，以确保当前机器环境满足安装条件</li> <li>设置 kubelet 并重启</li> <li>生成 ca 自签证书和服务器客户端证书用于 k8s 组件之间以及各节点之间身份识别</li> <li>配置 k8s 各组件以及管理员信息</li> <li>启动控制平面用到的三个静态 pod，api-server/controller-manager/scheduler</li> <li>启动本地 etcd 静态 pod</li> <li>上传 kubeadm/kubelet 配置为 ConfigMap</li> <li>上传证书到 kubeadm-certs</li> <li>标记当前节点为控制平面</li> <li>生成临时 token，便于其他节点通过 token 加入集群</li> <li>设置 kubelet 客户端证书为可用状态</li> <li>安装必要的插件，coredns/kube-proxy</li></ul></blockquote> <h2 id="安装-pod-网络插件"><a href="#安装-pod-网络插件" class="header-anchor">#</a> 安装 Pod 网络插件</h2> <p>安装插件前先配置下本地 hosts，确保 raw.githubusercontent.com 域名可用。</p> <div class="language-txt extra-class"><pre class="language-text"><code>199.232.68.133 raw.githubusercontent.com
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code>kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+</code></pre></div><p>Flannel pod 使用到的镜像会从仓库 quay.io 拉取，可能会有点慢，可以临时备个梯子加速下。</p> <h2 id="kubeadm-join"><a href="#kubeadm-join" class="header-anchor">#</a> kubeadm join</h2> <p>同样的，我们其他机器需要先安装好 docker，以及 k8s 各个组件。可以把 【安装 k8s 组件】章节的命令再运行一遍。</p> <p>同样的 worker 节点也需要安装有 kube-proxy/pause 等网络 pod。</p> <p>通过如下脚本安装：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">vim</span> ~/pull.sh
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token assign-left variable">images</span><span class="token operator">=</span><span class="token punctuation">(</span>
+    kube-proxy:v1.18.6
+    pause:3.2
+<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">imageName</span> <span class="token keyword">in</span> <span class="token variable">${images<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span> <span class="token punctuation">;</span> <span class="token keyword">do</span>
+    docker pull googlecontainersmirror/<span class="token variable">$imageName</span>
+    docker tag googlecontainersmirror/<span class="token variable">$imageName</span> k8s.gcr.io/<span class="token variable">$imageName</span>
+<span class="token keyword">done</span>
+</code></pre></div><blockquote><p>worker 节点安装的 k8s 版本最好与 master 节点的保持一致。</p></blockquote> <p>将前面备份的关键信息黏贴到 worker 并执行 join 操作。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>kubeadm <span class="token function">join</span> <span class="token number">192.168</span>.3.46:6443 --token huosj5.krvkm8dr9olvyutw <span class="token punctuation">\</span>
+    --discovery-token-ca-cert-hash sha256:609c8eb6dd96c62bc6f27e52fc9be91bfe08f80be99e7a5bae86ee65c4b3d675
+</code></pre></div><p>最后我们通过 kubectl get nodes 和 kubectl get --namespace kube-system pods 看下部署结果吧。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>NAME     STATUS   ROLES    AGE     VERSION
+master   Ready    master   3h59m   v1.18.6
+worker   Ready    <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>   3h25m   v1.18.6
+</code></pre></div><div class="language-shell extra-class"><pre class="language-shell"><code>NAME                             READY   STATUS    RESTARTS   AGE
+coredns-66bff467f8-4bs7n         <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+coredns-66bff467f8-dtfl9         <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+etcd-master                      <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+kube-apiserver-master            <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+kube-controller-manager-master   <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+kube-flannel-ds-amd64-5tzmx      <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h53m
+kube-flannel-ds-amd64-ndpzg      <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h26m
+kube-proxy-4kckl                 <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+kube-proxy-bkjwt                 <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h26m
+kube-scheduler-master            <span class="token number">1</span>/1     Running   <span class="token number">0</span>          3h59m
+</code></pre></div> <div class="gitalk-container"><div id="gitalk-container"></div></div> <div class="gitalk-container"><div id="gitalk-container"></div></div></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#安装-k8s-组件" title="安装 k8s 组件">安装 k8s 组件</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#kubeadm-init" title="kubeadm init">kubeadm init</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#安装-pod-网络插件" title="安装 Pod 网络插件">安装 Pod 网络插件</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#kubeadm-join" title="kubeadm join">kubeadm join</a></div></div></div></div> <footer class="footer" data-v-fdbf4940><div class="footer-left-wrap" data-v-fdbf4940><ul class="contact" data-v-fdbf4940><li class="contact-item" data-v-fdbf4940><a href="https://github.com/347255699" target="_blank" rel="noopener noreferrer" class="nav-link external" data-v-fdbf4940><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" data-v-fdbf4940><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" data-v-fdbf4940></path></svg>
+          
+        </a></li></ul></div> <div class="footer-right-wrap" data-v-fdbf4940><ul class="copyright" data-v-fdbf4940><li class="copyright-item" data-v-fdbf4940><a href="/2020/08/22/k8s-install/.html" class="nav-link" data-v-fdbf4940>Copyright © 2020 Menfre Blog.</a></li></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.8d42fabb.js" defer></script><script src="/assets/js/6.aea618f8.js" defer></script><script src="/assets/js/4.20006588.js" defer></script><script src="/assets/js/26.24545015.js" defer></script><script src="/assets/js/7.403b6e6e.js" defer></script>
+  </body>
+</html>
